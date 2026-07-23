@@ -211,15 +211,10 @@ with col_sensory:
         sensory_df = df["Sensory"].value_counts().reset_index()
         sensory_df.columns = ['الحالة', 'العدد']
         
-            sensory_df, x='الحالة', y='العدد', color='الحالة',
-            color_discrete_map={'ممتاز': '#154360', 'جيد': '#2980b9'}
-        )
-        fig_sensory.update_traces(width=0.42)
-        fig_sensory.update_layout(
-            margin=dict(l=10, r=10, t=10, b=10), height=260, xaxis_title="", yaxis_title="العدد",
-            showlegend=False, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)'
-        )
-        st.plotly_chart(fig_sensory, use_container_width=True)
+           st.dataframe(sensory_df)
+        
+                        
+         
 
 with col_chem:
     st.markdown("##### التحاليل الكيميائية")
