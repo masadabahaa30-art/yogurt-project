@@ -210,12 +210,7 @@ with col_sensory:
     if not df.empty:
         sensory_df = df["Sensory"].value_counts().reset_index()
         sensory_df.columns = ['الحالة', 'العدد']
-        
- st.dataframe(sensory_df)
-        
-                        
-         
-
+        st.dataframe(sensory_df)
 with col_chem:
     st.markdown("##### التحاليل الكيميائية")
     if not df.empty:
