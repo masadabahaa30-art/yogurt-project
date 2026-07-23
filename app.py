@@ -210,7 +210,7 @@ with col_sensory:
     if not df.empty:
         sensory_df = df["Sensory"].value_counts().reset_index()
         sensory_df.columns = ['الحالة', 'العدد']
-        fig_sensory = px.bar(
+        
             sensory_df, x='الحالة', y='العدد', color='الحالة',
             color_discrete_map={'ممتاز': '#154360', 'جيد': '#2980b9'}
         )
