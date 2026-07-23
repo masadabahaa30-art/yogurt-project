@@ -211,7 +211,7 @@ with col_sensory:
         sensory_df = df["Sensory"].value_counts().reset_index()
         sensory_df.columns = ['الحالة', 'العدد']
         
-           st.dataframe(sensory_df)
+ st.dataframe(sensory_df)
         
                         
          
