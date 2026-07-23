@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
+import altair as alt
+
 import io
 
 st.set_page_config(page_title="لوحة تحكم مراقبة جودة الزبادي", layout="wide", page_icon="🥛")
