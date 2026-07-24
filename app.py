@@ -204,19 +204,21 @@ st.markdown("---")
 # 1️⃣ الفحوصات الأولي)
 
 st.markdown("---")
-st.subheader("📊 الملخص النهائي المنظم لتقييمات الفحوصات")
+st.subheader("📊 الملخص النهائي لتقييمات الفحوصات")
 
 col1, col2, col3 = st.columns(3)
 
+# 1. الفحص الكيميائي (عمودين)
 with col1:
     st.markdown("### 🧪 الفحص الكيميائي")
     try:
         chem_data = df.select_dtypes(include='number').iloc[:, 0:2].sum()
-        chem_data.index = ['خالي من المضادات الحيوية', 'ممتاز']
+        chem_data.index = ['خالي من المضادات', 'ممتاز']
         st.bar_chart(chem_data)
     except:
         st.info("تعذر العرض")
 
+# 2. الفحص الحسي (عمودين)
 with col2:
     st.markdown("### 👁️ الفحص الحسي")
     try:
@@ -226,6 +228,7 @@ with col2:
     except:
         st.info("تعذر العرض")
 
+# 3. الفحص الميكروبيولوجي (3 أعمدة)
 with col3:
     st.markdown("### 🦠 الفحص الميكروبيولوجي")
     try:
