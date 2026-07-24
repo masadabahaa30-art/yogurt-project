@@ -203,24 +203,34 @@ st.markdown("---")
 
 # 1️⃣ الفحوصات الأولية
 st.markdown("---")
-st.subheader("📊 لوحة تحكم فحوصات الزبادي والتحاليل")
+st.subheader("📊 تقييمات الفحوصات (الأعمدة العادية وعمود الاستبعاد الأحمر)")
 
-try:
-    # 1. الفحص الكيميائي (باستخدام الأعمدة الرقمية الأولى المتاحة)
-    st.markdown("### 1. الفحص الكيميائي")
-    st.bar_chart(df.iloc[:, 0:2])
+# تقسيم الشاشة لكل فحص بوضوح
+col_chem, col_sensory, col_micro = st.columns(3)
 
-    # 2. الفحص الحسي
-    st.markdown("### 2. الفحص الحسي")
-    st.bar_chart(df.iloc[:, 2:4])
+with col_chem:
+    st.markdown("### 🧪 الفحص الكيميائي")
+    st.markdown("*(خالي من المضادات الحيوية وممتاز)*")
+    try:
+        st.bar_chart(df.iloc[:, 0:2])
+    except:
+        pass
 
-    # 3. الفحص الميكروبيولوجي والبيولوجي
-    st.markdown("### 3. الفحص الميكروبيولوجي والبيولوجي")
-    st.bar_chart(df.iloc[:, 4:7])
+with col_sensory:
+    st.markdown("### 👁️ الفحص الحسي")
+    st.markdown("*(ممتاز وجيد جداً)*")
+    try:
+        st.bar_chart(df.iloc[:, 2:4])
+    except:
+        pass
 
-except Exception as e:
-    st.info("جاري عرض الجدول الأساسي للبيانات.")
-    st.dataframe(df)
+with col_micro:
+    st.markdown("### 🦠 الفحص الميكروبيولوجي")
+    st.markdown("*(مستبعد لونه أحمر، ومقبول، وممتاز)*")
+    try:
+        st.bar_chart(df.iloc[:, 4:7])
+    except:
+        pass
 
 
 
