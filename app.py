@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import altair as alt
-import plotly.express as px
+import matplotlib.pyplot as plt
+import streamlit as st
 
 import io
 
@@ -207,53 +208,17 @@ st.subheader("📥 1. الفحوصات الأولية (حسي، كيميائي،
 col_sensory, col_chem, col_micro = st.columns(3)
 
 with col_sensory:
-        st.markdown("##### الفحص الحسي")
-        if not df.empty:
-                sensory_df = df["Sensory"].value_counts().reset_index()
-        sensory_df.columns = ['الحالة', 'العدد']
-        fig_sensory = px.bar(
-            sensory_df, x='الحالة', y='العدد', color='الحالة',
-            color_discrete_map={'ممتاز': '#154360', 'جيد': '#2980b9'}
-        )
-        fig_sensory.update_traces(width=0.42)
-        fig_sensory.update_layout(
-            margin=dict(l=10, r=10, t=10, b=10), height=260,
-            showlegend=False, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)'
-        )
-        st.plotly_chart(fig_sensory, use_container_width=True)
+  وwith col_sensory:
+    st.markdown("##### الفحص الحسي")
+    st.bar_chart(sensory_df.set_index('الحالة'))
 
 with col_chem:
-    st.markdown("##### التحاليل الكيميائية")
-    if not df.empty:
-        chem_df = df["Chemical_Analysis"].value_counts().reset_index()
-        chem_df.columns = ['الحالة', 'العدد']
-        fig_chem = px.bar(
-            chem_df, x='الحالة', y='العدد', color='الحالة',
-            color_discrete_map={'ممتاز': '#154360', 'جيد': '#2980b9'}
-        )
-        fig_chem.update_traces(width=0.42)
-        fig_chem.update_layout(
-            margin=dict(l=10, r=10, t=10, b=10), height=260,
-            showlegend=False, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)'
-        )
-        st.plotly_chart(fig_chem, use_container_width=True) 
+    st.markdown("##### الفحص الكيميائي")
+    st.bar_chart(chem_df.set_index('الحالة'))
 
 with col_micro:
-    st.markdown("##### الفحص المايكروبيولوجي")
-    if not df.empty:
-        micro_df = df["Microbiological"].value_counts().reset_index()
-        micro_df.columns = ['الحالة', 'العدد']
-        fig_micro = px.bar(
-            micro_df, x='الحالة', y='العدد', color='الحالة'
-        )
-        fig_micro.update_traces(width=0.42)
-        fig_micro.update_layout(
-            margin=dict(l=10, r=10, t=10, b=10), height=260,
-            showlegend=False, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)'
-        )
-        st.plotly_chart(fig_micro, use_container_width=True)
-
-st.markdown("---")
+    st.markdown("##### الفحص الميكروبيولوجي")
+    st.bar_chart(micro_df.set_index('الحالة')) اسم العمود المناسب عندك
 
 target_shift_for_plots = selected_shift if selected_shift != "الكل" else "وردية الصباح"
 base_shift_df = df_full[df_full['Shift'] == target_shift_for_plots].copy()
