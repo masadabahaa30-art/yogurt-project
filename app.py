@@ -203,28 +203,20 @@ st.markdown("---")
 
 # 1️⃣ الفحوصات الأولية
 st.markdown("---")
-st.subheader("📊 لوحة تحكم فحوصات الزبادي بالأسماء الدقيقة")
+st.subheader("📊 لوحة تحكم فحوصات الزبادي والتحاليل")
 
 try:
-    # 1. الفحص الكيميائي (خالي من المضادات الحيوية + ممتاز)
+    # 1. الفحص الكيميائي (باستخدام الأعمدة الرقمية الأولى المتاحة)
     st.markdown("### 1. الفحص الكيميائي")
-    chem_cols = [col for col in ['خالي من المضادات الحيوية', 'ممتاز'] if col in df.columns]
-    if chem_cols:
-        st.bar_chart(df[chem_cols])
-    else:
-        st.info("الأعمدة الكيميائية غير مطابقة تماماً، يرجى مراجعة الأسماء.")
+    st.bar_chart(df.iloc[:, 0:2])
 
-    # 2. الفحص الحسي (ممتاز + جيد جداً)
+    # 2. الفحص الحسي
     st.markdown("### 2. الفحص الحسي")
-    sensory_cols = [col for col in ['ممتاز', 'جيد جداً'] if col in df.columns]
-    if sensory_cols:
-        st.bar_chart(df[sensory_cols])
+    st.bar_chart(df.iloc[:, 2:4])
 
-    # 3. الفحص الميكروبيولوجي (مستبعد + مقبول + ممتاز)
+    # 3. الفحص الميكروبيولوجي والبيولوجي
     st.markdown("### 3. الفحص الميكروبيولوجي والبيولوجي")
-    micro_cols = [col for col in ['مستبعد', 'مقبول', 'ممتاز'] if col in df.columns]
-    if micro_cols:
-        st.bar_chart(df[micro_cols])
+    st.bar_chart(df.iloc[:, 4:7])
 
 except Exception as e:
     st.info("جاري عرض الجدول الأساسي للبيانات.")
