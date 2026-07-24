@@ -204,27 +204,20 @@ st.markdown("---")
 # 1️⃣ الفحوصات الأولية
 
 st.subheader("📊 نتائج فحوصات الزبادي (الكيميائية، الحسية، والميكروبيولوجية)")
+st.markdown("---")
+st.subheader("📊 نتائج الفحوصات والتحاليل")
 
-# 1. الفحص الكيميائي (العمودين: خالي من المضادات وممتاز)
-st.markdown("### 1. الفحص الكيميائي")
-chem_cols = [col for col in ['Antibiotic_Free', 'Chemical_Excellent', 'خالي_من_المضادات', 'ممتاز_كيميائي'] if col in df.columns]
-if chem_cols:
-    st.bar_chart(df[chem_cols])
-else:
-    # عرض افتراضي لو الأعمدة مسمى بطريقة تانية
-    st.info("جاري عرض بيانات الفحص الكيميائي المتاحة في الجدول.")
+# عرض الأعمدة الرقمية المتاحة في جدول البيانات في رسمة أعمدة مباشرة
+try:
+    # بيجيب الأعمدة الرقمية ويرسمها فوراً من غير ما يبحث عن أسماء معقدة
+    numeric_df = df.select_dtypes(include=['float64', 'int64'])
+    if not numeric_df.empty:
+        st.bar_chart(numeric_df)
+    else:
+        st.dataframe(df)
+except Exception as e:
+    st.dataframe(df)
 
-# 2. الفحص الحسي (ممتاز وجيد جداً)
-st.markdown("### 2. الفحص الحسي")
-sensory_cols = [col for col in ['Sensory_Score', 'Sensory_Evaluation', 'الحسي', 'ممتاز_وجيد'] if col in df.columns]
-if sensory_cols:
-    st.bar_chart(df[sensory_cols])
-
-# 3. الفحص الميكروبيولوجي (3 أعمدة: مستبعد، مقبول، وممتاز)
-st.markdown("### 3. الفحص الميكروبيولوجي (مستبعد، مقبول، وممتاز)")
-micro_cols = [col for col in ['Excluded', 'Accepted', 'Excellent', 'مستبعد', 'مقبول', 'ممتاز_بايولوجي'] if col in df.columns]
-if micro_cols:
-    st.bar_chart(df[micro_cols])
 
 # 2️⃣ اللزوجة و الـ pH
 st.subheader("🧪 2. قياسات الحموضة pH واللزوجة (منع انفصال مصل اللبن Syneresis)")
