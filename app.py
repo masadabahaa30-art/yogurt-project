@@ -208,7 +208,7 @@ st.subheader("📥 1. الفحوصات الأولية (حسي، كيميائي،
 col_sensory, col_chem, col_micro = st.columns(3)
 
 with col_sensory:
-  وwith col_sensory:
+  with col_sensory:
     st.markdown("##### الفحص الحسي")
     st.bar_chart(sensory_df.set_index('الحالة'))
 
