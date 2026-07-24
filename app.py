@@ -207,12 +207,9 @@ st.subheader("📥 1. الفحوصات الأولية (حسي، كيميائي،
 col_sensory, col_chem, col_micro = st.columns(3)
 
 with col_sensory:
-    st.markdown("##### الفحص الحسي")
-    if not df.empty:
-      with col_sensory:
-    st.markdown("##### الفحص الحسي")
-    if not df.empty:
-        sensory_df = df["Sensory"].value_counts().reset_index()
+        st.markdown("##### الفحص الحسي")
+        if not df.empty:
+                sensory_df = df["Sensory"].value_counts().reset_index()
         sensory_df.columns = ['الحالة', 'العدد']
         fig_sensory = px.bar(
             sensory_df, x='الحالة', y='العدد', color='الحالة',
@@ -243,9 +240,6 @@ with col_chem:
 
 with col_micro:
     st.markdown("##### الفحص المايكروبيولوجي")
-    if not df.empty:
-        with col_micro:
-    st.markdown("##### الفحص الميكروبيولوجي")
     if not df.empty:
         micro_df = df["Microbiological"].value_counts().reset_index()
         micro_df.columns = ['الحالة', 'العدد']
