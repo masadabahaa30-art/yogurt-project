@@ -205,23 +205,11 @@ st.markdown("---")
 st.markdown("---")
 st.subheader("📊 نتائج الفحوصات للزبادي")
 
-# 1. الفحوصات الحسية (طعم، قوام، لون، رائحة...)
-st.markdown("### 1. الفحوصات الحسية")
-if 'sensory_df' in locals() or 'df' in locals():
-    # استبدلي 'Sensory_Column' بأسماء الأعمدة الفعليّة عندك في الجدول
-    st.bar_chart(df[['Sensory_Score']]) 
+st.markdown("---")
+st.subheader("📊 رسومات الداشبورد من جدول البيانات")
 
-# 2. الفحوصات الكيميائية (نسبة الدهون، الحموضة، المواد الصلبة الكلية...)
-st.markdown("### 2. الفحوصات الكيميائية")
-st.bar_chart(df[['Fat', 'Total_Solids', 'Acidity']])
-
-# 3. الفحوصات الميكروبيولوجية (العد البكتيري، الخمائر والميسلات...)
-st.markdown("### 3. الفحوصات الميكروبيولوجية")
-st.bar_chart(df[['Bacterial_Count', 'Yeast_Mold']])
-target_shift_for_plots = selected_shift if selected_shift != "الكل" else "وردية الصباح"
-base_shift_df = df_full[df_full['Shift'] == target_shift_for_plots].copy()
-base_shift_df['Batch_Num_Int'] = base_shift_df['Batch_ID'].str.replace('B', '').astype(int)
-df_sorted = base_shift_df.sort_values('Batch_Num_Int')
+# الكود ده بياخد الأرقام والقياسات من الجدول لوحده وبيقسمها رسومات خطية وأعمدة من غير إيرور
+st.line_chart(df.select_dtypes(include=['float64', 'int64']))
 
 # 2️⃣ اللزوجة و الـ pH
 st.subheader("🧪 2. قياسات الحموضة pH واللزوجة (منع انفصال مصل اللبن Syneresis)")
