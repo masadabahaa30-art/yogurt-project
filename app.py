@@ -202,42 +202,38 @@ c5.metric("متوسط نسبة الهدر", f"{df['Waste'].mean():.2f}%" if not 
 st.markdown("---")
 
 # 1️⃣ الفحوصات الأولي)
+
 st.markdown("---")
-st.subheader("📊 الملخص النهائي لتقييمات الفحوصات")
+st.subheader("📊 الملخص النهائي المنظم لتقييمات الفحوصات")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("### 🧪 الفحص الكيميائي")
-    st.caption("عمودين: خالي من المضادات | ممتاز")
     try:
-        # مجموع قيم العمودين الكيميائيين في شكل عمودين ملخصين فقط
-        chem_summary = df.select_dtypes(include='number').iloc[:, 0:2].sum()
-        st.bar_chart(chem_summary)
+        chem_data = df.select_dtypes(include='number').iloc[:, 0:2].sum()
+        chem_data.index = ['خالي من المضادات الحيوية', 'ممتاز']
+        st.bar_chart(chem_data)
     except:
         st.info("تعذر العرض")
 
 with col2:
     st.markdown("### 👁️ الفحص الحسي")
-    st.caption("عمودين: ممتاز | جيد جداً")
     try:
-        # مجموع قيم العمودين الحسيين في شكل عمودين ملخصين فقط
-        sensory_summary = df.select_dtypes(include='number').iloc[:, 2:4].sum()
-        st.bar_chart(sensory_summary)
+        sensory_data = df.select_dtypes(include='number').iloc[:, 2:4].sum()
+        sensory_data.index = ['ممتاز', 'جيد جداً']
+        st.bar_chart(sensory_data)
     except:
         st.info("تعذر العرض")
 
 with col3:
-    st.markdown("### 🦠 الفحص البيولوجي")
-    st.caption("3 أعمدة: مستبعد | مقبول | ممتاز")
+    st.markdown("### 🦠 الفحص الميكروبيولوجي")
     try:
-        # مجموع قيم الـ 3 أعمدة البيولوجية في شكل 3 أعمدة ملخصة فقط
-        bio_summary = df.select_dtypes(include='number').iloc[:, 4:7].sum()
-        st.bar_chart(bio_summary)
+        bio_data = df.select_dtypes(include='number').iloc[:, 4:7].sum()
+        bio_data.index = ['مستبعد', 'مقبول', 'ممتاز']
+        st.bar_chart(bio_data)
     except:
         st.info("تعذر العرض")
-
-
 # 2️⃣ اللزوجة و الـ pH
 st.subheader("🧪 2. قياسات الحموضة pH واللزوجة (منع انفصال مصل اللبن Syneresis)")
 col_ph, col_visc = st.columns(2)
