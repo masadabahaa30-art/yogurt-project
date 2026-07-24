@@ -201,46 +201,41 @@ c5.metric("متوسط نسبة الهدر", f"{df['Waste'].mean():.2f}%" if not 
 
 st.markdown("---")
 
-# 1️⃣ الفحوصات الأولية
-import pandas as pd
-import streamlit as st
-
+# 1️⃣ الفحوصات الأولي)
 st.markdown("---")
-st.subheader("📊 لوحة تحكم فحوصات الزبادي النهائية")
+st.subheader("📊 الملخص النهائي لتقييمات الفحوصات")
 
-# دمج وتجهيز قيم الأعمدة المطلوبة صراحة لكل فحص لتظهر في شكل أعمدة معدودة ومباشرة
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("### 🧪 الفحص الكيميائي")
-    st.caption("عمودين: خالي من المضادات الحيوية | ممتاز")
+    st.caption("عمودين: خالي من المضادات | ممتاز")
     try:
-        # رسم عمودين الكيميائي المباشرين
-        chem_df = df.select_dtypes(include='number').iloc[:, 0:2]
-        st.bar_chart(chem_df)
+        # مجموع قيم العمودين الكيميائيين في شكل عمودين ملخصين فقط
+        chem_summary = df.select_dtypes(include='number').iloc[:, 0:2].sum()
+        st.bar_chart(chem_summary)
     except:
-        st.info("جاري عرض الكيميائي")
+        st.info("تعذر العرض")
 
 with col2:
     st.markdown("### 👁️ الفحص الحسي")
     st.caption("عمودين: ممتاز | جيد جداً")
     try:
-        # رسم عمودين الحسي المباشرين
-        sensory_df = df.select_dtypes(include='number').iloc[:, 2:4]
-        st.bar_chart(sensory_df)
+        # مجموع قيم العمودين الحسيين في شكل عمودين ملخصين فقط
+        sensory_summary = df.select_dtypes(include='number').iloc[:, 2:4].sum()
+        st.bar_chart(sensory_summary)
     except:
-        st.info("جاري عرض الحسي")
+        st.info("تعذر العرض")
 
 with col3:
     st.markdown("### 🦠 الفحص البيولوجي")
-    st.caption("3 أعمدة: مستبعد (أحمر) | مقبول | ممتاز")
+    st.caption("3 أعمدة: مستبعد | مقبول | ممتاز")
     try:
-        # رسم الثلاث أعمدة البيولوجية المباشرة
-        bio_df = df.select_dtypes(include='number').iloc[:, 4:7]
-        st.bar_chart(bio_df)
+        # مجموع قيم الـ 3 أعمدة البيولوجية في شكل 3 أعمدة ملخصة فقط
+        bio_summary = df.select_dtypes(include='number').iloc[:, 4:7].sum()
+        st.bar_chart(bio_summary)
     except:
-        st.info("جاري عرض البيولوجي")
-
+        st.info("تعذر العرض")
 
 
 # 2️⃣ اللزوجة و الـ pH
