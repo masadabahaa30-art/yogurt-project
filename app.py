@@ -202,22 +202,22 @@ c5.metric("متوسط نسبة الهدر", f"{df['Waste'].mean():.2f}%" if not 
 st.markdown("---")
 
 # 1️⃣ الفحوصات الأولية
-st.subheader("📥 1. الفحوصات الأولية (حسي، كيميائي، ومايكروبيولوجي)")
-col_sensory, col_chem, col_micro = st.columns(3)
+st.markdown("---")
+st.subheader("📊 نتائج الفحوصات للزبادي")
 
-with col_sensory:
-  with col_sensory:
-    st.markdown("##### الفحص الحسي")
-    st.bar_chart(sensory_df.set_index('الحالة'))
+# 1. الفحوصات الحسية (طعم، قوام، لون، رائحة...)
+st.markdown("### 1. الفحوصات الحسية")
+if 'sensory_df' in locals() or 'df' in locals():
+    # استبدلي 'Sensory_Column' بأسماء الأعمدة الفعليّة عندك في الجدول
+    st.bar_chart(df[['Sensory_Score']]) 
 
-with col_chem:
-    st.markdown("##### الفحص الكيميائي")
-    st.bar_chart(chem_df.set_index('الحالة'))
+# 2. الفحوصات الكيميائية (نسبة الدهون، الحموضة، المواد الصلبة الكلية...)
+st.markdown("### 2. الفحوصات الكيميائية")
+st.bar_chart(df[['Fat', 'Total_Solids', 'Acidity']])
 
-with col_micro:
-    st.markdown("##### الفحص الميكروبيولوجي")
-    st.bar_chart(micro_df.set_index('الحالة'))
-
+# 3. الفحوصات الميكروبيولوجية (العد البكتيري، الخمائر والميسلات...)
+st.markdown("### 3. الفحوصات الميكروبيولوجية")
+st.bar_chart(df[['Bacterial_Count', 'Yeast_Mold']])
 target_shift_for_plots = selected_shift if selected_shift != "الكل" else "وردية الصباح"
 base_shift_df = df_full[df_full['Shift'] == target_shift_for_plots].copy()
 base_shift_df['Batch_Num_Int'] = base_shift_df['Batch_ID'].str.replace('B', '').astype(int)
