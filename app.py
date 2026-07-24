@@ -202,26 +202,34 @@ c5.metric("متوسط نسبة الهدر", f"{df['Waste'].mean():.2f}%" if not 
 st.markdown("---")
 
 # 1️⃣ الفحوصات الأولية
-
 st.markdown("---")
-st.subheader("📊 نتائج فحوصات الزبادي (الكيميائية، الحسية، والميكروبيولوجية)")
+st.subheader("📊 لوحة تحكم فحوصات الزبادي بالأسماء الدقيقة")
 
 try:
-    # 1. الفحص الكيميائي (أول عمودين)
+    # 1. الفحص الكيميائي (خالي من المضادات الحيوية + ممتاز)
     st.markdown("### 1. الفحص الكيميائي")
-    st.bar_chart(df.iloc[:, 0:2])
+    chem_cols = [col for col in ['خالي من المضادات الحيوية', 'ممتاز'] if col in df.columns]
+    if chem_cols:
+        st.bar_chart(df[chem_cols])
+    else:
+        st.info("الأعمدة الكيميائية غير مطابقة تماماً، يرجى مراجعة الأسماء.")
 
-    # 2. الفحص الحسي (العمودين التاليين)
+    # 2. الفحص الحسي (ممتاز + جيد جداً)
     st.markdown("### 2. الفحص الحسي")
-    st.bar_chart(df.iloc[:, 2:4])
+    sensory_cols = [col for col in ['ممتاز', 'جيد جداً'] if col in df.columns]
+    if sensory_cols:
+        st.bar_chart(df[sensory_cols])
 
-    # 3. الفحص الميكروبيولوجي (الثلاث أعمدة التاليين)
+    # 3. الفحص الميكروبيولوجي (مستبعد + مقبول + ممتاز)
     st.markdown("### 3. الفحص الميكروبيولوجي والبيولوجي")
-    st.bar_chart(df.iloc[:, 4:7])
+    micro_cols = [col for col in ['مستبعد', 'مقبول', 'ممتاز'] if col in df.columns]
+    if micro_cols:
+        st.bar_chart(df[micro_cols])
 
 except Exception as e:
-    st.info("جاري عرض جدول البيانات الأساسي.")
+    st.info("جاري عرض الجدول الأساسي للبيانات.")
     st.dataframe(df)
+
 
 
 # 2️⃣ اللزوجة و الـ pH
