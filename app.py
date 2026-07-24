@@ -218,7 +218,7 @@ with col_chem:
 
 with col_micro:
     st.markdown("##### الفحص الميكروبيولوجي")
-   st.bar_chart(micro_df.set_index('الحالة'))
+    st.bar_chart(micro_df.set_index('الحالة'))
 
 target_shift_for_plots = selected_shift if selected_shift != "الكل" else "وردية الصباح"
 base_shift_df = df_full[df_full['Shift'] == target_shift_for_plots].copy()
