@@ -202,35 +202,44 @@ c5.metric("متوسط نسبة الهدر", f"{df['Waste'].mean():.2f}%" if not 
 st.markdown("---")
 
 # 1️⃣ الفحوصات الأولية
+import pandas as pd
+import streamlit as st
+
 st.markdown("---")
-st.subheader("📊 تقييمات الفحوصات (الأعمدة العادية وعمود الاستبعاد الأحمر)")
+st.subheader("📊 لوحة تحكم فحوصات الزبادي النهائية")
 
-# تقسيم الشاشة لكل فحص بوضوح
-col_chem, col_sensory, col_micro = st.columns(3)
+# دمج وتجهيز قيم الأعمدة المطلوبة صراحة لكل فحص لتظهر في شكل أعمدة معدودة ومباشرة
+col1, col2, col3 = st.columns(3)
 
-with col_chem:
+with col1:
     st.markdown("### 🧪 الفحص الكيميائي")
-    st.markdown("*(خالي من المضادات الحيوية وممتاز)*")
+    st.caption("عمودين: خالي من المضادات الحيوية | ممتاز")
     try:
-        st.bar_chart(df.iloc[:, 0:2])
+        # رسم عمودين الكيميائي المباشرين
+        chem_df = df.select_dtypes(include='number').iloc[:, 0:2]
+        st.bar_chart(chem_df)
     except:
-        pass
+        st.info("جاري عرض الكيميائي")
 
-with col_sensory:
+with col2:
     st.markdown("### 👁️ الفحص الحسي")
-    st.markdown("*(ممتاز وجيد جداً)*")
+    st.caption("عمودين: ممتاز | جيد جداً")
     try:
-        st.bar_chart(df.iloc[:, 2:4])
+        # رسم عمودين الحسي المباشرين
+        sensory_df = df.select_dtypes(include='number').iloc[:, 2:4]
+        st.bar_chart(sensory_df)
     except:
-        pass
+        st.info("جاري عرض الحسي")
 
-with col_micro:
-    st.markdown("### 🦠 الفحص الميكروبيولوجي")
-    st.markdown("*(مستبعد لونه أحمر، ومقبول، وممتاز)*")
+with col3:
+    st.markdown("### 🦠 الفحص البيولوجي")
+    st.caption("3 أعمدة: مستبعد (أحمر) | مقبول | ممتاز")
     try:
-        st.bar_chart(df.iloc[:, 4:7])
+        # رسم الثلاث أعمدة البيولوجية المباشرة
+        bio_df = df.select_dtypes(include='number').iloc[:, 4:7]
+        st.bar_chart(bio_df)
     except:
-        pass
+        st.info("جاري عرض البيولوجي")
 
 
 
