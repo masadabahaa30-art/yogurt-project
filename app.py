@@ -423,3 +423,9 @@ st.markdown("""
 * **الانحراف المحتمل:** خروج الـ pH عن (4.20 - 4.50) أو حدوث **إنفصال مصل اللبن (Syneresis)** وانخفاض اللزوجة عن 1800 cP.
 * **الإجراء التصحيحي:** إيقاف التخمير فوراً، تعقيم الخطوط، تعديل نسب بادئات التخمير، وإعدام الباتش المتأثر لحماية المستهلك.
 """)
+st.markdown("---")
+st.markdown(
+    "<div style='text-align: center; color: gray;'>Developed with ❤️ by "
+    "<b>Maiada Bahaa</b></div>",
+    unsafe_allow_html=True,
+)
