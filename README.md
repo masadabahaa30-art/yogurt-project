@@ -30,17 +30,7 @@ The application allows food safety specialists and quality control teams to trac
 * **Visualization:** Plotly, Matplotlib, Seaborn
 
 ---
-
-## How to Run Locally
-
-1. **Clone the repository:**
----
-
-## Author
-
-**Maiada Bahaa Salman**  
-* [LinkedIn Profile](https://www.linkedin.com/in/maiada-bahaa-906893252)  
+* [LinkedIn Profile](https://www.linkedin.com/in/maiada-bahaa-906893252)
 * [GitHub Profile](https://github.com/masadabahaa30-art)
-   ```bash
-   git clone [https://github.com/masadabahaa30-art/yogurt-quality-analysis.git](https://github.com/masadabahaa30-art/yogurt-quality-analysis.git)
+haa30-art/yogurt-quality-analysis.git](https://github.com/masadabahaa30-art/yogurt-quality-analysis.git)
    cd yogurt-quality-analysis
